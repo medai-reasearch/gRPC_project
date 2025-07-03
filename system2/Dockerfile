@@ -19,6 +19,9 @@ RUN pip install --upgrade pip setuptools wheel
 COPY requirements-grpc.txt .
 RUN pip install --no-cache-dir -r requirements-grpc.txt
 
+# 예제 파일 생성
+RUN git clone -b v1.73.0 --depth 1 --shallow-submodules https://github.com/grpc/grpc
+
 # 마이크로 서비스 관련 라이브러리 설치
 COPY requirements.txt .
 RUN pip install -r requirements.txt
