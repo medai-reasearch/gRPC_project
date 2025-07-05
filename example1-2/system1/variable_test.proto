@@ -1,0 +1,57 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.variable_test";
+option java_outer_classname = "MyVariableTest";
+option objc_class_prefix = "HLW";
+
+package variable_test;
+
+// The greeting service definition.
+service Transfer {
+  // Sends a greeting
+  rpc TransferFloat (FloatVariable) returns (FloatVariable) {}
+
+  rpc TransferInt (HelloRequIntVariableest) returns (IntVariable) {}
+
+  rpc TransferOther (OtherVariable) returns (OtherVariable) {}
+}
+
+message FloatVariable {
+  double variable_double = 1;
+  float variable_float = 2;
+}
+
+message IntVariable {
+  int32 variable_int32 = 1;
+  int64 variable_int64 = 2;
+  uint32 variable_uint32 = 3;
+  uint64 variable_uint64 = 4;
+  sint32 variable_sint32 = 5;
+  sint64 variable_sint64 = 6;
+  fixed32 variable_fixed32 = 7;
+  fixed64 variable_fixed64 = 8;
+  sfixed32 variable_sfixed32 = 9;
+  sfixed64 variable_sfixed64 = 10;
+}
+
+message OtherVariable {
+  bool variable_bool = 1;
+  string variable_string = 2;
+  bytes variable_bytes = 3;
+}
+
