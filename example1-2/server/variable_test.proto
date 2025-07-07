@@ -1,0 +1,68 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+// option java_multiple_files = true;
+// option java_package = "io.grpc.examples.variable_test";
+// python과 달리 java는 패키지의 파일이 한 파일에 전부 있는 것이 아닌, 아래 java_package를 통해 디렉토리 경로를
+// java_multiple_files가 활성화되면, 각 메세지나 서비스가 파이썬처럼 variable_test.Transfer 등으로 접근할 수 있고
+// 관리가 편하게 각각의 .java 파일로 분할되는데 그걸 사용하기 위한 옵션이다.
+
+// option java_outer_classname = "MyVariableTest";
+// 각 java에서 패키지에 구성된 서비스 및 메세지를 감싸는 가장 바깥쪽 클래스 이름을 설정하는 것
+
+// option objc_class_prefix = "HLW";
+// Objective C의 경우 네임스페이스가 없기에 클래스 이름의 충돌을 막기 위해 prefix가 필요하다.
+// Message FloatVariable의 경우 Objective C에서 해당 클래스 이름이 HLWFloatVariable로 사용하겠다는 것
+
+package variable_test; 
+// python, C++ 등에서 모듈 import 경로로 추가됨, ex) import variable_test_pb2
+// java package가 없을 경우 해당 칸이 java package로도 사용
+// Go 모듈에서도 variable_test라는 패키지명이 사용됨
+
+// The greeting service definition.
+service Transfer {
+  // Sends a greeting
+  rpc TransferFloat (FloatVariable) returns (FloatVariable) {}
+
+  rpc TransferInt (IntVariable) returns (IntVariable) {}
+
+  rpc TransferOther (OtherVariable) returns (OtherVariable) {}
+}
+
+message FloatVariable {
+  double double_val = 1;
+  float float_val = 2;
+}
+
+message IntVariable {
+  int32 int32_val = 1;
+  int64 int64_val = 2;
+  uint32 uint32_val = 3;
+  uint64 uint64_val = 4;
+  sint32 sint32_val = 5;
+  sint64 sint64_val = 6;
+  fixed32 fixed32_val = 7;
+  fixed64 fixed64_val = 8;
+  sfixed32 sfixed32_val = 9;
+  sfixed64 sfixed64_val = 10;
+}
+
+message OtherVariable {
+  bool bool_val = 1;
+  string string_val = 2;
+  bytes bytes_val = 3;
+}
+
